@@ -1,7 +1,6 @@
 package ua.vedroid.dao3.service;
 
 import java.util.List;
-import java.util.Optional;
 import ua.vedroid.dao3.dao.ManufacturerDao;
 import ua.vedroid.dao3.lib.Inject;
 import ua.vedroid.dao3.lib.Service;
