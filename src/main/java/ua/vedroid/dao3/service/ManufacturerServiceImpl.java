@@ -22,8 +22,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public List<Manufacturer> getAllManufacturers() {
-        return manufacturerDao.getAllManufacturers();
+    public List<Manufacturer> getAll() {
+        return manufacturerDao.getAll();
     }
 
     @Override

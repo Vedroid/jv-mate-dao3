@@ -21,7 +21,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public List<Manufacturer> getAllManufacturers() {
+    public List<Manufacturer> getAll() {
         return Storage.manufacturers;
     }
 
