@@ -19,16 +19,16 @@ public class ApplicationStarter {
         manufacturerService.create(audi);
         manufacturerService.create(tesla);
 
-        System.out.println("All Manufacturers: " + manufacturerService.getAllManufacturers());
+        System.out.println("All Manufacturers:\t\t" + manufacturerService.getAll());
 
         Manufacturer updatedAudi = manufacturerService.getById(1L);
         updatedAudi.setName("Audi");
         manufacturerService.update(updatedAudi);
 
-        System.out.println("Update 'Avde' -> 'Audi': " + manufacturerService.getAllManufacturers());
+        System.out.println("Update 'Avde' -> 'Audi':" + manufacturerService.getAll());
 
         manufacturerService.deleteById(0L);
 
-        System.out.println("Deleted Id '0': " + manufacturerService.getAllManufacturers());
+        System.out.println("Deleted Id '0': \t\t" + manufacturerService.getAll());
     }
 }
