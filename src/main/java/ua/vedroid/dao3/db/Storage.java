@@ -15,14 +15,16 @@ public class Storage {
     private static long driverId = 0;
     private static long manufacturerId = 0;
 
-    public static void addCar(Car car) {
+    public static Car addCar(Car car) {
         car.setId(carId++);
         cars.add(car);
+        return car;
     }
 
-    public static void addDriver(Driver driver) {
+    public static Driver addDriver(Driver driver) {
         driver.setId(driverId++);
         drivers.add(driver);
+        return driver;
     }
 
     public static Manufacturer addManufacturer(Manufacturer manufacturer) {
