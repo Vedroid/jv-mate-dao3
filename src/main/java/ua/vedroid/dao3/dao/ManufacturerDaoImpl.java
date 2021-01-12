@@ -27,7 +27,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        int index = Storage.manufacturers.indexOf(getById(manufacturer.getId()).orElseThrow());
+        int index = Storage.manufacturers.indexOf(getById(manufacturer.getId()).get());
         return Storage.manufacturers.set(index, manufacturer);
     }
 
