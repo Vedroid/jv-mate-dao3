@@ -26,26 +26,26 @@ public class ApplicationStarter {
         Manufacturer audi = new Manufacturer("Avde", "Germany");
         Manufacturer tesla = new Manufacturer("Tesla", "USA");
 
-        Driver vasya = new Driver("Vasya", "BO123456");
-        Driver petya = new Driver("Petya", "TT32534");
-        Driver sasha = new Driver("Sasha", "ME46387");
-        Driver abdula = new Driver("Abdula", "");
-
-        Car golfVariant = new Car(volkswagen, "Golf Variant");
-        Car cybertruck = new Car(tesla, "Cybertruck");
-        Car passat = new Car(volkswagen, "Passat");
-        Car audi80 = new Car(audi, "80");
-
         manufacturerService.create(volkswagen);
         manufacturerService.create(tesla);
         manufacturerService.create(audi);
         manufacturerServiceTest();
+
+        Driver vasya = new Driver("Vasya", "BO123456");
+        Driver petya = new Driver("Petya", "TT32534");
+        Driver sasha = new Driver("Sasha", "ME46387");
+        Driver abdula = new Driver("Abdula", "");
 
         driverService.create(vasya);
         driverService.create(petya);
         driverService.create(sasha);
         driverService.create(abdula);
         driverServiceTest();
+
+        Car golfVariant = new Car(volkswagen, "Golf Variant");
+        Car cybertruck = new Car(tesla, "Cybertruck");
+        Car passat = new Car(volkswagen, "Passat");
+        Car audi80 = new Car(audi, "80");
 
         carService.create(golfVariant);
         carService.create(cybertruck);
