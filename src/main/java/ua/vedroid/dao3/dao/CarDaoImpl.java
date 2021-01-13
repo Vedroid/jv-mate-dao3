@@ -2,6 +2,7 @@ package ua.vedroid.dao3.dao;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import ua.vedroid.dao3.db.Storage;
 import ua.vedroid.dao3.lib.Dao;
 import ua.vedroid.dao3.model.Car;
@@ -23,6 +24,14 @@ public class CarDaoImpl implements CarDao {
     @Override
     public List<Car> getAll() {
         return Storage.cars;
+    }
+
+    @Override
+    public List<Car> getAllByDriver(Long driverId) {
+        return Storage.cars.stream()
+                .filter(car -> car.getDrivers().stream()
+                        .anyMatch(driver -> driver.getId().equals(driverId)))
+                .collect(Collectors.toList());
     }
 
     @Override

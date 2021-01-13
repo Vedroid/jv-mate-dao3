@@ -1,7 +1,6 @@
 package ua.vedroid.dao3.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import ua.vedroid.dao3.dao.CarDao;
 import ua.vedroid.dao3.lib.Inject;
 import ua.vedroid.dao3.lib.Service;
@@ -52,9 +51,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        return getAll().stream()
-                .filter(car -> car.getDrivers().stream()
-                        .anyMatch(driver -> driver.getId().equals(driverId)))
-                .collect(Collectors.toList());
+        return carDao.getAllByDriver(driverId);
     }
 }
