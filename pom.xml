@@ -10,7 +10,6 @@
 
     <properties>
         <jdk.version>11</jdk.version>
-        <mysql.version>8.0.22</mysql.version>
         <postgresql.version>42.2.18</postgresql.version>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
