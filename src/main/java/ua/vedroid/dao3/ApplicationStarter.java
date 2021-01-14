@@ -1,6 +1,10 @@
 package ua.vedroid.dao3;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import ua.vedroid.dao3.exceptions.DataProcessingException;
 import ua.vedroid.dao3.lib.Injector;
 import ua.vedroid.dao3.model.Car;
 import ua.vedroid.dao3.model.Driver;
@@ -8,6 +12,7 @@ import ua.vedroid.dao3.model.Manufacturer;
 import ua.vedroid.dao3.service.CarService;
 import ua.vedroid.dao3.service.DriverService;
 import ua.vedroid.dao3.service.ManufacturerService;
+import ua.vedroid.dao3.util.ConnectionUtil;
 
 public class ApplicationStarter {
     private static final Injector injector =
@@ -18,6 +23,8 @@ public class ApplicationStarter {
     private static CarService carService;
 
     public static void main(String[] args) {
+        truncateTable();
+
         manufacturerService = (ManufacturerService) injector.getInstance(ManufacturerService.class);
         driverService = (DriverService) injector.getInstance(DriverService.class);
         carService = (CarService) injector.getInstance(CarService.class);
@@ -58,13 +65,13 @@ public class ApplicationStarter {
         System.out.println("\n@@@ manufacturerServiceTest @@@");
         System.out.println("All Manufacturers:\n\t" + manufacturerService.getAll());
 
-        Manufacturer updatedAudi = manufacturerService.getById(2L);
+        Manufacturer updatedAudi = manufacturerService.getById(3L);
         updatedAudi.setName("Audi");
         manufacturerService.update(updatedAudi);
 
         System.out.println("Update 'Avde' -> 'Audi':\n\t" + manufacturerService.getAll());
 
-        manufacturerService.deleteById(0L);
+        manufacturerService.deleteById(1L);
 
         System.out.println("Deleted Id '0':\n\t" + manufacturerService.getAll());
     }
@@ -111,5 +118,15 @@ public class ApplicationStarter {
         carService.deleteById(0L);
 
         System.out.println("Deleted Id '0':\n\t" + carService.getAll());
+    }
+
+    private static void truncateTable() {
+        String query = "TRUNCATE TABLE taxi_service.manufacturers RESTART IDENTITY ;";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DataProcessingException("Truncate table 'manufacturers' is failed", ex);
+        }
     }
 }
