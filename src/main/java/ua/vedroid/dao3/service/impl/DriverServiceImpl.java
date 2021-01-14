@@ -1,10 +1,11 @@
-package ua.vedroid.dao3.service;
+package ua.vedroid.dao3.service.impl;
 
 import java.util.List;
 import ua.vedroid.dao3.dao.DriverDao;
 import ua.vedroid.dao3.lib.Inject;
 import ua.vedroid.dao3.lib.Service;
 import ua.vedroid.dao3.model.Driver;
+import ua.vedroid.dao3.service.DriverService;
 
 @Service
 public class DriverServiceImpl implements DriverService {
