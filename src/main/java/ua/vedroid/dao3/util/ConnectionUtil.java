@@ -11,6 +11,8 @@ public class ConnectionUtil {
     private static final String IP = "localhost";
     private static final String PORT = "5432";
     private static final String DB = "mate";
+    private static final String SCHEMA = "taxi_service";
+    private static final String TIMEZONE = "UTC";
 
     private ConnectionUtil() {
     }
@@ -19,7 +21,8 @@ public class ConnectionUtil {
         Properties connectionProperties = new Properties();
         connectionProperties.put("user", USER);
         connectionProperties.put("password", PASSWORD);
-        String url = "jdbc:postgresql://" + IP + ":" + PORT + "/" + DB + "?serverTimezone=UTC";
+        String url = "jdbc:postgresql://" + IP + ":" + PORT + "/" + DB
+                + "?currentSchema=" + SCHEMA + "&serverTimezone=" + TIMEZONE;
         try {
             return DriverManager.getConnection(url, connectionProperties);
         } catch (SQLException e) {
