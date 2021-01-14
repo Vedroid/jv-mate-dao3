@@ -18,8 +18,7 @@ import ua.vedroid.dao3.util.ConnectionUtil;
 public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        String query = "INSERT INTO manufacturers"
-                + "(manufacturer_name, manufacturer_country) VALUES (?, ?);";
+        String query = "INSERT INTO manufacturers(name, country) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection
                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -30,7 +29,6 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             if (resultSet.next()) {
                 manufacturer.setId(resultSet.getObject("manufacturer_id", Long.class));
             }
-            resultSet.close();
             return manufacturer;
         } catch (SQLException ex) {
             throw new DataProcessingException("Insert " + manufacturer
@@ -40,8 +38,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public Optional<Manufacturer> getById(Long manufacturerId) {
-        String query = "SELECT * FROM manufacturers "
-                + "WHERE manufacturer_id = ? AND is_deleted = false;";
+        String query = "SELECT * FROM manufacturers WHERE id = ? AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, manufacturerId);
@@ -50,7 +47,6 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             if (resultSet.next()) {
                 manufacturerFromResultSet = Optional.of(getManufacturerFromResultSet(resultSet));
             }
-            resultSet.close();
             return manufacturerFromResultSet;
         } catch (SQLException ex) {
             throw new DataProcessingException("Get manufacturer with id="
@@ -69,7 +65,6 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             while (resultSet.next()) {
                 manufacturers.add(getManufacturerFromResultSet(resultSet));
             }
-            resultSet.close();
             return manufacturers;
         } catch (SQLException ex) {
             throw new DataProcessingException("Get all manufacturers is failed", ex);
@@ -78,9 +73,8 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer manufacturer) {
-        String query = "UPDATE manufacturers "
-                + "SET manufacturer_name = ?, manufacturer_country = ? "
-                + "WHERE is_deleted = false AND manufacturer_id = ?;";
+        String query = "UPDATE manufacturers SET name = ?, country = ? "
+                + "WHERE is_deleted = false AND id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, manufacturer.getName());
@@ -95,8 +89,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
 
     @Override
     public boolean deleteById(Long manufacturerId) {
-        String query = "UPDATE manufacturers SET is_deleted = true "
-                + "WHERE manufacturer_id = ?;";
+        String query = "UPDATE manufacturers SET is_deleted = true WHERE id = ?;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, manufacturerId);
@@ -108,7 +101,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     }
 
     private Manufacturer getManufacturerFromResultSet(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getObject("manufacturer_id", Long.class);
+        Long id = resultSet.getObject("manufacturer_id", Long.class);
         String name = resultSet.getString("manufacturer_name");
         String country = resultSet.getString("manufacturer_country");
         Manufacturer manufacturer = new Manufacturer(name, country);

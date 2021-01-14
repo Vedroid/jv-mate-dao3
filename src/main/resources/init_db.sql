@@ -20,11 +20,11 @@ GRANT ALL ON SCHEMA taxi_service TO postgres;
 
 CREATE TABLE taxi_service.manufacturers
 (
-    manufacturer_id      bigserial             NOT NULL,
-    manufacturer_name    character varying     NOT NULL,
-    manufacturer_country character varying     NOT NULL,
-    is_deleted           boolean DEFAULT false NOT NULL,
-    PRIMARY KEY (manufacturer_id)
+    id         bigserial             NOT NULL,
+    name       character varying     NOT NULL,
+    country    character varying     NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL,
+    PRIMARY KEY (id)
 );
 
 ALTER TABLE taxi_service.manufacturers
