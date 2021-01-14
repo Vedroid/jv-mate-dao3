@@ -1,8 +1,9 @@
-package ua.vedroid.dao3.dao;
+package ua.vedroid.dao3.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import ua.vedroid.dao3.dao.CarDao;
 import ua.vedroid.dao3.db.Storage;
 import ua.vedroid.dao3.lib.Dao;
 import ua.vedroid.dao3.model.Car;
