@@ -63,70 +63,78 @@ public class ApplicationStarter {
 
     private static void manufacturerServiceTest() {
         System.out.println("\n@@@ manufacturerServiceTest @@@");
-        System.out.println("All Manufacturers:\n\t" + manufacturerService.getAll());
+        printAll("All Manufacturers:", manufacturerService.getAll());
 
         Manufacturer updatedAudi = manufacturerService.getById(3L);
         updatedAudi.setName("Audi");
         manufacturerService.update(updatedAudi);
 
-        System.out.println("Update 'Avde' -> 'Audi':\n\t" + manufacturerService.getAll());
+        printAll("All manufacturers after update:", manufacturerService.getAll());
 
         manufacturerService.deleteById(1L);
 
-        System.out.println("Deleted Id '0':\n\t" + manufacturerService.getAll());
+        System.out.println("Deleted Id '1':\n\t" + manufacturerService.getAll());
     }
 
     private static void driverServiceTest() {
         System.out.println("\n@@@ driverServiceTest @@@");
-        System.out.println("All drivers:\n\t" + driverService.getAll());
+        printAll("All drivers:", driverService.getAll());
 
         Driver driverById = driverService.getById(1L);
         driverById.setLicenceNumber("@newLicenceNumber@");
         driverService.update(driverById);
 
-        System.out.println("All drivers after update:\n\t" + driverService.getAll());
+        printAll("All drivers after update:", driverService.getAll());
 
-        driverService.deleteById(3L);
+        driverService.deleteById(4L);
 
-        System.out.println("Deleted Id '3':\n\t" + driverService.getAll());
+        printAll("Deleted Id '4':", driverService.getAll());
     }
 
     private static void carServiceTest() {
         System.out.println("\n@@@ carServiceTest @@@");
-        System.out.println("All cars:\n\t" + carService.getAll());
+        printAll("All cars:", carService.getAll());
 
         Car carById = carService.getById(1L);
-        carById.setDrivers(driverService.getAll());
+        carById.setModel("@NEW MODEL@");
         carService.update(carById);
 
-        System.out.println("All cars after update:\n\t" + carService.getAll());
+        printAll("All cars after update:", carService.getAll());
 
         Driver newDriver = driverService.getById(1L);
-        carService.addDriverToCar(newDriver, carService.getById(1L));
+        carById.setDrivers(driverService.getAll());
+        carService.update(carById);
         carService.addDriverToCar(newDriver, carService.getById(2L));
+        carService.addDriverToCar(newDriver, carService.getById(3L));
 
-        System.out.println("All cars after add driver:\n\t" + carService.getAll());
+        printAll("All cars after add driver:", carService.getAll());
 
-        List<Car> allByDriver = carService.getAllByDriver(newDriver.getId());
+        printAll("All cars by driverId=1:", carService.getAllByDriver(1L));
+        printAll("All cars by driverId=2:", carService.getAllByDriver(2L));
 
-        System.out.println("All cars by driver:\n\t" + allByDriver);
-
-        System.out.println("All cars before remove driver:\n\t" + carService.getAll());
+        printAll("All cars before remove driver(carId=" + carById.getId()
+                + ", driverId=" + newDriver.getId() + "):", carService.getAll());
         carService.removeDriverFromCar(newDriver, carById);
-        System.out.println("All cars after  remove driver:\n\t" + carService.getAll());
+        printAll("All cars after  remove driver:", carService.getAll());
 
-        carService.deleteById(0L);
-
-        System.out.println("Deleted Id '0':\n\t" + carService.getAll());
+        carService.deleteById(2L);
+        printAll("Deleted Id '2':", carService.getAll());
     }
 
     private static void truncateTable() {
-        String query = "TRUNCATE TABLE taxi_service.manufacturers RESTART IDENTITY ;";
+        String query = "TRUNCATE TABLE taxi_service.manufacturers RESTART IDENTITY CASCADE; "
+                + "TRUNCATE TABLE taxi_service.cars RESTART IDENTITY CASCADE; "
+                + "TRUNCATE TABLE taxi_service.drivers RESTART IDENTITY CASCADE; ";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.executeUpdate();
         } catch (SQLException ex) {
-            throw new DataProcessingException("Truncate table 'manufacturers' is failed", ex);
+            throw new DataProcessingException("Truncate tables is failed", ex);
         }
+    }
+
+    private static void printAll(String msg, List<?> cars) {
+        System.out.println(msg);
+        cars.forEach(c -> System.out.println("\t" + c));
     }
 }
