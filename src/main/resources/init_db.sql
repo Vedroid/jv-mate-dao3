@@ -29,3 +29,39 @@ CREATE TABLE taxi_service.manufacturers
 
 ALTER TABLE taxi_service.manufacturers
     OWNER TO postgres;
+
+CREATE TABLE taxi_service.cars
+(
+    id         bigserial             NOT NULL,
+    m_id       bigint                NOT NULL,
+    model      character varying     NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (m_id) REFERENCES taxi_service.manufacturers (id)
+);
+
+ALTER TABLE taxi_service.cars
+    OWNER to postgres;
+
+CREATE TABLE taxi_service.drivers
+(
+    id             bigserial             NOT NULL,
+    name           character varying     NOT NULL,
+    licence_number character varying     NOT NULL,
+    is_deleted     boolean DEFAULT false NOT NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE taxi_service.drivers
+    OWNER to postgres;
+
+CREATE TABLE taxi_service.cars_drivers
+(
+    car_id    bigint,
+    driver_id bigint,
+    CONSTRAINT car_fkey FOREIGN KEY (car_id) REFERENCES taxi_service.cars (id),
+    CONSTRAINT driver_fkey FOREIGN KEY (driver_id) REFERENCES taxi_service.drivers (id)
+);
+
+ALTER TABLE taxi_service.cars_drivers
+    OWNER to postgres;
