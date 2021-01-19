@@ -7,10 +7,13 @@
     <groupId>ua.vedroid</groupId>
     <artifactId>jv-mate-dao3</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
-        <jdk.version>11</jdk.version>
+        <jdk.version>15</jdk.version>
         <postgresql.version>42.2.18</postgresql.version>
+        <servlet.version>4.0.1</servlet.version>
+        <maven.war.plugin.version>3.3.1</maven.war.plugin.version>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,6 +28,12 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -61,6 +70,14 @@
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven.war.plugin.version}</version>
+                    <configuration>
+                        <webXml>src/main/webapp/web.xml</webXml>
                     </configuration>
                 </plugin>
             </plugins>
