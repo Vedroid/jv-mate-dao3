@@ -27,7 +27,7 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                manufacturer.setId(resultSet.getObject("manufacturer_id", Long.class));
+                manufacturer.setId(resultSet.getObject("id", Long.class));
             }
             return manufacturer;
         } catch (SQLException ex) {
@@ -51,7 +51,6 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
         } catch (SQLException ex) {
             throw new DataProcessingException("Get manufacturer with id="
                     + manufacturerId + " is failed", ex);
-
         }
     }
 
@@ -101,9 +100,9 @@ public class ManufacturerDaoJdbcImpl implements ManufacturerDao {
     }
 
     private Manufacturer getManufacturerFromResultSet(ResultSet resultSet) throws SQLException {
-        Long id = resultSet.getObject("manufacturer_id", Long.class);
-        String name = resultSet.getString("manufacturer_name");
-        String country = resultSet.getString("manufacturer_country");
+        Long id = resultSet.getObject("id", Long.class);
+        String name = resultSet.getString("name");
+        String country = resultSet.getString("country");
         Manufacturer manufacturer = new Manufacturer(name, country);
         manufacturer.setId(id);
         return manufacturer;
