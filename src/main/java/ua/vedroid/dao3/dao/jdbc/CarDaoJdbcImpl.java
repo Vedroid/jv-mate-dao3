@@ -20,7 +20,7 @@ import ua.vedroid.dao3.util.ConnectionUtil;
 public class CarDaoJdbcImpl implements CarDao {
     @Override
     public Car create(Car car) {
-        String query = "INSERT INTO cars(m_id, model) VALUES (?, ?);";
+        String query = "INSERT INTO cars(manufacturer_id, model) VALUES (?, ?);";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -29,9 +29,9 @@ public class CarDaoJdbcImpl implements CarDao {
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                car.setId(resultSet.getObject("id",Long.class));
+                car.setId(resultSet.getObject("id", Long.class));
             }
-            if (!car.getDrivers().isEmpty()) {
+            if (car.getDrivers() != null && !car.getDrivers().isEmpty()) {
                 addDrivers(connection, car);
             }
             return car;
@@ -44,7 +44,7 @@ public class CarDaoJdbcImpl implements CarDao {
     public Optional<Car> getById(Long id) {
         String query = "SELECT c.id, c.model, m.id AS m_id, m.name, m.country "
                 + "FROM cars c "
-                + "JOIN manufacturers m on m.id = c.m_id "
+                + "JOIN manufacturers m on m.id = c.manufacturer_id "
                 + "WHERE c.id = ? "
                 + "AND c.is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
@@ -65,7 +65,7 @@ public class CarDaoJdbcImpl implements CarDao {
     public List<Car> getAll() {
         String query = "SELECT c.id, c.model, m.id AS m_id, m.name, m.country "
                 + "FROM cars c "
-                + "JOIN manufacturers m on m.id = c.m_id "
+                + "JOIN manufacturers m on m.id = c.manufacturer_id "
                 + "AND c.is_deleted = FALSE;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
@@ -82,16 +82,15 @@ public class CarDaoJdbcImpl implements CarDao {
 
     @Override
     public Car update(Car car) {
-        String query = "UPDATE cars SET m_id = ?, model = ?"
+        String query = "UPDATE cars SET model = ?"
                 + " WHERE id = ? AND is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             removeDrivers(connection, car.getId());
-            statement.setLong(1, car.getManufacturer().getId());
-            statement.setString(2, car.getModel());
-            statement.setLong(3, car.getId());
+            statement.setString(1, car.getModel());
+            statement.setLong(2, car.getId());
             statement.executeUpdate();
-            if (!car.getDrivers().isEmpty()) {
+            if (car.getDrivers() != null && !car.getDrivers().isEmpty()) {
                 addDrivers(connection, car);
             }
             return car;
@@ -119,8 +118,9 @@ public class CarDaoJdbcImpl implements CarDao {
                 + "FROM cars c "
                 + "LEFT JOIN cars_drivers cd on c.id = cd.car_id "
                 + "LEFT JOIN drivers d on cd.driver_id = d.id "
-                + "LEFT JOIN manufacturers m on m.id = c.m_id "
-                + "WHERE d.id = ? AND c.is_deleted = false;";
+                + "LEFT JOIN manufacturers m on m.id = c.manufacturer_id "
+                + "WHERE d.id = ? AND c.is_deleted = false "
+                + "AND d.is_deleted = false;";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, driverId);

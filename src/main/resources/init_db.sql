@@ -32,12 +32,12 @@ ALTER TABLE taxi_service.manufacturers
 
 CREATE TABLE taxi_service.cars
 (
-    id         bigserial             NOT NULL,
-    m_id       bigint                NOT NULL,
-    model      character varying     NOT NULL,
-    is_deleted boolean DEFAULT false NOT NULL,
+    id              bigserial             NOT NULL,
+    manufacturer_id bigint                NOT NULL,
+    model           character varying     NOT NULL,
+    is_deleted      boolean DEFAULT false NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (m_id) REFERENCES taxi_service.manufacturers (id)
+    FOREIGN KEY (manufacturer_id) REFERENCES taxi_service.manufacturers (id)
 );
 
 ALTER TABLE taxi_service.cars

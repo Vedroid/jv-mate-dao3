@@ -7,21 +7,21 @@ INSERT INTO taxi_service.manufacturers(name, country) VALUES ('Volkswagen', 'Ger
 INSERT INTO taxi_service.manufacturers(name, country) VALUES ('Skoda', 'USA');
 INSERT INTO taxi_service.manufacturers(name, country) VALUES ('Tesla', 'USA');
 
-insert into cars (m_id, model) values (1, 'A4');
-insert into cars (m_id, model) values (1, 'S4');
-insert into cars (m_id, model) values (1, 'A6');
-insert into cars (m_id, model) values (1, 'Q5');
-insert into cars (m_id, model) values (2, 'Jetta');
-insert into cars (m_id, model) values (2, 'Golf');
-insert into cars (m_id, model) values (2, 'Passat');
-insert into cars (m_id, model) values (3, 'Superb');
-insert into cars (m_id, model) values (3, 'Fabia');
-insert into cars (m_id, model) values (3, 'Rapid');
-insert into cars (m_id, model) values (3, 'Octavia');
-insert into cars (m_id, model) values (4, 'Model S');
-insert into cars (m_id, model) values (4, 'Cybertruck');
-insert into cars (m_id, model) values (4, 'Model X');
-insert into cars (m_id, model) values (4, 'Model Y');
+insert into cars (manufacturer_id, model) values (1, 'A4');
+insert into cars (manufacturer_id, model) values (1, 'S4');
+insert into cars (manufacturer_id, model) values (1, 'A6');
+insert into cars (manufacturer_id, model) values (1, 'Q5');
+insert into cars (manufacturer_id, model) values (2, 'Jetta');
+insert into cars (manufacturer_id, model) values (2, 'Golf');
+insert into cars (manufacturer_id, model) values (2, 'Passat');
+insert into cars (manufacturer_id, model) values (3, 'Superb');
+insert into cars (manufacturer_id, model) values (3, 'Fabia');
+insert into cars (manufacturer_id, model) values (3, 'Rapid');
+insert into cars (manufacturer_id, model) values (3, 'Octavia');
+insert into cars (manufacturer_id, model) values (4, 'Model S');
+insert into cars (manufacturer_id, model) values (4, 'Cybertruck');
+insert into cars (manufacturer_id, model) values (4, 'Model X');
+insert into cars (manufacturer_id, model) values (4, 'Model Y');
 
 insert into taxi_service.drivers (name, licence_number) values ('Delcina', '87-400-6368');
 insert into taxi_service.drivers (name, licence_number) values ('Alwin', '64-385-3276');
