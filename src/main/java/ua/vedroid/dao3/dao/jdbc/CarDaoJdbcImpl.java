@@ -181,7 +181,7 @@ public class CarDaoJdbcImpl implements CarDao {
         String query = "SELECT d.id, d.name, d.licence_number "
                 + "FROM cars_drivers cd "
                 + "JOIN drivers d on d.id = cd.driver_id "
-                + "WHERE car_id = ?";
+                + "WHERE car_id = ? AND d.is_deleted = FALSE;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, carId);
             ResultSet resultSet = statement.executeQuery();
