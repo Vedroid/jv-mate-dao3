@@ -10,6 +10,117 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>injectData</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.InjectDataController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>injectData</servlet-name>
+        <url-pattern>/injectData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteData</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.DeleteDataController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteData</servlet-name>
+        <url-pattern>/deleteData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addDriversToCar</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.car.AddDriversController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addDriversToCar</servlet-name>
+        <url-pattern>/cars/drivers/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allManufacturers</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.manufacturer.GetAllManufacturersController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allManufacturers</servlet-name>
+        <url-pattern>/manufacturers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createManufacturer</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.manufacturer.CreateManufacturerController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createManufacturer</servlet-name>
+        <url-pattern>/manufacturers/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteManufacturer</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.manufacturer.DeleteManufacturerController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteManufacturer</servlet-name>
+        <url-pattern>/manufacturers/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allCars</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.car.GetAllCarsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allCars</servlet-name>
+        <url-pattern>/cars</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createCar</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.car.CreateCarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createCar</servlet-name>
+        <url-pattern>/cars/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteCar</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.car.DeleteCarController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteCar</servlet-name>
+        <url-pattern>/cars/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>allDrivers</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.driver.GetAllDriversController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>allDrivers</servlet-name>
+        <url-pattern>/drivers</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>createDriver</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.driver.CreateDriverController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>createDriver</servlet-name>
+        <url-pattern>/drivers/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteDriver</servlet-name>
+        <servlet-class>ua.vedroid.dao3.controllers.driver.DeleteDriverController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteDriver</servlet-name>
+        <url-pattern>/drivers/delete</url-pattern>
     </servlet-mapping>
 </web-app>
