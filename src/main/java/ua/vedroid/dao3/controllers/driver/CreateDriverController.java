@@ -28,14 +28,7 @@ public class CreateDriverController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String licenceNumber = req.getParameter("licenceNumber");
-
-        if (name.isEmpty() || licenceNumber.isEmpty()) {
-            req.setAttribute("msg", "The field cannot be empty!");
-            req.getRequestDispatcher(CREATE_JSP).forward(req, resp);
-        } else {
-            service.create(new Driver(name, licenceNumber));
-            resp.sendRedirect(req.getContextPath() + "/");
-        }
-
+        service.create(new Driver(name, licenceNumber));
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

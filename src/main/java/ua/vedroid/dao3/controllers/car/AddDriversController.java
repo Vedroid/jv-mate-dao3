@@ -29,21 +29,17 @@ public class AddDriversController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        Long driverId = Long.valueOf(req.getParameter("driverId"));
+        Long carId = Long.valueOf(req.getParameter("carId"));
         Car car = null;
         Driver driver = null;
-        Long driverId = null;
-        Long carId = null;
         try {
-            driverId = Long.valueOf(req.getParameter("driverId"));
-            carId = Long.valueOf(req.getParameter("carId"));
             car = carService.getById(carId);
             driver = driverService.getById(driverId);
             carService.addDriverToCar(driver, car);
             resp.sendRedirect(req.getContextPath() + "/cars/all");
-        } catch (NumberFormatException e) {
-            req.setAttribute("msg", "The field cannot be empty!");
-            req.getRequestDispatcher(ADD_DRIVER_JSP).forward(req, resp);
         } catch (NoSuchElementException e) {
             if (car == null) {
                 req.setAttribute("msg", "Car with id=" + carId

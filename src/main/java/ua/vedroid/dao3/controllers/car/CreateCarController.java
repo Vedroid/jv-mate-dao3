@@ -33,21 +33,15 @@ public class CreateCarController extends HttpServlet {
             throws ServletException, IOException {
         String model = req.getParameter("model");
         String manufacturerId = req.getParameter("manufacturerId");
-
-        if (model.isEmpty() || manufacturerId.isEmpty()) {
-            req.setAttribute("msg", "The field cannot be empty!");
+        try {
+            Manufacturer manufacturer =
+                    manufacturerService.getById(Long.valueOf(manufacturerId));
+            carService.create(new Car(manufacturer, model));
+            resp.sendRedirect(req.getContextPath() + "/");
+        } catch (NoSuchElementException e) {
+            req.setAttribute("msg",
+                    "Manufacturer with id=" + manufacturerId + " not found!");
             req.getRequestDispatcher(CREATE_JSP).forward(req, resp);
-        } else {
-            try {
-                Manufacturer manufacturer =
-                        manufacturerService.getById(Long.valueOf(manufacturerId));
-                carService.create(new Car(manufacturer, model));
-                resp.sendRedirect(req.getContextPath() + "/");
-            } catch (NoSuchElementException e) {
-                req.setAttribute("msg",
-                        "Manufacturer with id=" + manufacturerId + " not found!");
-                req.getRequestDispatcher(CREATE_JSP).forward(req, resp);
-            }
         }
     }
 }

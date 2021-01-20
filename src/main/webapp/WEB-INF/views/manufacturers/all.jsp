@@ -16,6 +16,7 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Country</th>
             </tr>
             <%--@elvariable id="manufacturers" type="java.util.List"--%>
             <c:forEach var="manufacturer" items="${manufacturers}">
@@ -25,6 +26,9 @@
                     </td>
                     <td>
                         <c:out value="${manufacturer.name}"/>
+                    </td>
+                    <td>
+                        <c:out value="${manufacturer.country}"/>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
