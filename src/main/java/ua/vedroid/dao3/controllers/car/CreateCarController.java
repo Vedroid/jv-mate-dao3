@@ -1,7 +1,6 @@
 package ua.vedroid.dao3.controllers.car;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,18 +29,13 @@ public class CreateCarController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+            throws IOException {
         String model = req.getParameter("car_model");
         String manufacturerId = req.getParameter("car_manufacturerId");
-        try {
-            Manufacturer manufacturer =
-                    manufacturerService.getById(Long.valueOf(manufacturerId));
-            carService.create(new Car(manufacturer, model));
-            resp.sendRedirect(req.getContextPath() + "/");
-        } catch (NoSuchElementException e) {
-            req.setAttribute("msg",
-                    "Manufacturer with id=" + manufacturerId + " not found!");
-            req.getRequestDispatcher(CREATE_JSP).forward(req, resp);
-        }
+        Manufacturer manufacturer =
+                manufacturerService.getById(Long.valueOf(manufacturerId));
+        carService.create(new Car(manufacturer, model));
+        resp.sendRedirect(req.getContextPath() + "/");
+
     }
 }

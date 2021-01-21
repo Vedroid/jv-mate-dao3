@@ -1,7 +1,6 @@
 package ua.vedroid.dao3.controllers.car;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,17 +29,12 @@ public class AddDriversController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        try {
-            Long driverId = Long.valueOf(req.getParameter("driverId"));
-            Long carId = Long.valueOf(req.getParameter("carId"));
-            Car car = carService.getById(carId);
-            Driver driver = driverService.getById(driverId);
-            carService.addDriverToCar(driver, car);
-            resp.sendRedirect(req.getContextPath() + "/cars");
-        } catch (NoSuchElementException ex) {
-            req.setAttribute("msg", ex);
-            req.getRequestDispatcher(ADD_DRIVER_JSP).forward(req, resp);
-        }
+            throws IOException {
+        Long driverId = Long.valueOf(req.getParameter("driverId"));
+        Long carId = Long.valueOf(req.getParameter("carId"));
+        Car car = carService.getById(carId);
+        Driver driver = driverService.getById(driverId);
+        carService.addDriverToCar(driver, car);
+        resp.sendRedirect(req.getContextPath() + "/cars");
     }
 }
