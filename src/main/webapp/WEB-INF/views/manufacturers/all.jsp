@@ -18,7 +18,6 @@
                 <th>Name</th>
                 <th>Country</th>
             </tr>
-            <%--@elvariable id="manufacturers" type="java.util.List"--%>
             <c:forEach var="manufacturer" items="${manufacturers}">
                 <tr>
                     <td>
@@ -32,7 +31,7 @@
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                        /manufacturers/delete?id=${manufacturer.id}" style="color: darkred">
+                        /manufacturers/delete?manufacturer_id=${manufacturer.id}" style="color: darkred">
                             Delete
                         </a>
                     </td>

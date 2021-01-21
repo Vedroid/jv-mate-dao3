@@ -18,7 +18,6 @@
                 <th>Name</th>
                 <th>Licence number</th>
             </tr>
-            <%--@elvariable id="drivers" type="java.util.List"--%>
             <c:forEach var="driver" items="${drivers}">
                 <tr>
                     <td>
@@ -32,7 +31,7 @@
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                        /drivers/delete?id=${driver.id}" style="color: darkred">
+                        /drivers/delete?driver_id=${driver.id}" style="color: darkred">
                             Delete
                         </a>
                     </td>

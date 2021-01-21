@@ -17,9 +17,17 @@
                 <th>ID</th>
                 <th>Model</th>
                 <th>Manufacturer</th>
-                <th>Drivers</th>
+                <th>Drivers
+                    <table style="border: 0">
+                        <tr>
+                            <th style="text-align: center; width: 50%; border: 0">Name</th>
+                            <th style="border: 0">|</th>
+                            <th style="text-align: center; width: 50%; border: 0">Licence number
+                            </th>
+                        </tr>
+                    </table>
+                </th>
             </tr>
-            <%--@elvariable id="cars" type="java.util.List"--%>
             <c:forEach var="car" items="${cars}">
                 <tr>
                     <td>
@@ -31,14 +39,31 @@
                     <td>
                         <c:out value="${car.manufacturer.name}"/>
                     </td>
-                    <td>
-                        <c:forEach var="drivers" items="${car.drivers}">
-                            <c:out value="${drivers.name}"/>
-                        </c:forEach>
+                    <td style="text-align: center">
+                        <c:choose>
+                            <c:when test="${car.drivers.size() > 0}">
+                                <table style="text-align: center; width: 100%; border: 0">
+                                    <c:forEach var="drivers" items="${car.drivers}">
+                                        <tr>
+                                            <td style="width: 50%; border: 0">
+                                                <c:out value="${drivers.name}"/>
+                                            </td>
+                                            <td style="border: 0">|</td>
+                                            <td style="width: 50%; border: 0">
+                                                <c:out value="${drivers.licenceNumber}"/>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </c:when>
+                            <c:otherwise>
+                                No drivers
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}
-                        /cars/delete?id=${car.id}" style="color: darkred">
+                        /cars/delete?car_id=${car.id}" style="color: darkred">
                             Delete
                         </a>
                     </td>

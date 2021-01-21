@@ -31,26 +31,15 @@ public class AddDriversController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long driverId = Long.valueOf(req.getParameter("driverId"));
-        Long carId = Long.valueOf(req.getParameter("carId"));
-        Car car = null;
-        Driver driver = null;
         try {
-            car = carService.getById(carId);
-            driver = driverService.getById(driverId);
+            Long driverId = Long.valueOf(req.getParameter("driverId"));
+            Long carId = Long.valueOf(req.getParameter("carId"));
+            Car car = carService.getById(carId);
+            Driver driver = driverService.getById(driverId);
             carService.addDriverToCar(driver, car);
-            resp.sendRedirect(req.getContextPath() + "/cars/all");
-        } catch (NoSuchElementException e) {
-            if (car == null) {
-                req.setAttribute("msg", "Car with id=" + carId
-                        + " not found!");
-            } else if (driver == null) {
-                req.setAttribute("msg", "Driver with id=" + driverId
-                        + " not found!");
-            } else {
-                req.setAttribute("msg", "Failed to add driver(id=" + driver.getId()
-                        + ") to car(id=" + car.getId() + ")!");
-            }
+            resp.sendRedirect(req.getContextPath() + "/cars");
+        } catch (NoSuchElementException ex) {
+            req.setAttribute("msg", ex);
             req.getRequestDispatcher(ADD_DRIVER_JSP).forward(req, resp);
         }
     }

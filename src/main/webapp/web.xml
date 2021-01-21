@@ -19,16 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>injectData</servlet-name>
-        <url-pattern>/injectData</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>deleteData</servlet-name>
-        <servlet-class>ua.vedroid.dao3.controllers.DeleteDataController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>deleteData</servlet-name>
-        <url-pattern>/deleteData</url-pattern>
+        <url-pattern>/inject</url-pattern>
     </servlet-mapping>
 
     <servlet>

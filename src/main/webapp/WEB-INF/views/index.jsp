@@ -1,4 +1,3 @@
-<jsp:useBean id="msg" scope="request" type="java.lang.String"/>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
@@ -6,10 +5,7 @@
     </head>
     <body>
         <h1>Hello world!</h1>
-
-        <a href="${pageContext.request.contextPath}/injectData">Inject test data into DB</a>
-        <br>
-        <a href="${pageContext.request.contextPath}/deleteData">Delete data from DB</a>
+        <a href="${pageContext.request.contextPath}/inject">Inject test data into DB</a>
         <h4 style="color: dodgerblue">${msg}</h4>
         <table>
             <tr>
