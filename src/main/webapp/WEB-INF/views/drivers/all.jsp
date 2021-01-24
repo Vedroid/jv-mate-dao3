@@ -15,6 +15,7 @@
         <table>
             <tr>
                 <th>ID</th>
+                <th>Login</th>
                 <th>Name</th>
                 <th>Licence number</th>
             </tr>
@@ -22,6 +23,9 @@
                 <tr>
                     <td>
                         <c:out value="${driver.id}"/>
+                    </td>
+                    <td>
+                        <c:out value="${driver.login}"/>
                     </td>
                     <td>
                         <c:out value="${driver.name}"/>

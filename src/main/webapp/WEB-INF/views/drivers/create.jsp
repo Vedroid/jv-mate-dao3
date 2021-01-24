@@ -7,9 +7,15 @@
         <h1>Hello! Please provide driver details</h1>
         <h4 style="color: red">${msg}</h4>
         <form method="post" action="${pageContext.request.contextPath}/drivers/create">
+            <label for="login">Login:</label>
+            <input id="login" type="text" name="driver_login" required>
+            <br>
+            <label for="pwd">Password:</label>
+            <input id="pwd" type="password" name="driver_pwd" required>
+            <br>
             <label for="name">Name:</label>
-            <input id="name" type="text" name="driver_name" required> <br>
-
+            <input id="name" type="text" name="driver_name" required>
+            <br>
             <label for="licenceNumber"> Licence number:</label>
             <input id="licenceNumber" type="text" name="driver_licenceNumber" required> <br>
 
