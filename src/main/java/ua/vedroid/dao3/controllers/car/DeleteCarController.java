@@ -5,13 +5,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ua.vedroid.dao3.ApplicationStarter;
 import ua.vedroid.dao3.lib.Injector;
 import ua.vedroid.dao3.service.CarService;
 
 public class DeleteCarController extends HttpServlet {
     private static final Injector injector =
-            Injector.getInstance(ApplicationStarter.class.getPackageName());
+            Injector.getInstance("ua.vedroid.dao3");
     private CarService service =
             (CarService) injector.getInstance(CarService.class);
 

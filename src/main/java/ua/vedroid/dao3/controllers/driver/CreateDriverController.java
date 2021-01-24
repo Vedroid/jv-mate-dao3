@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ua.vedroid.dao3.ApplicationStarter;
 import ua.vedroid.dao3.lib.Injector;
 import ua.vedroid.dao3.model.Driver;
 import ua.vedroid.dao3.service.DriverService;
@@ -13,7 +12,7 @@ import ua.vedroid.dao3.service.DriverService;
 public class CreateDriverController extends HttpServlet {
     private static final String CREATE_JSP = "/WEB-INF/views/drivers/create.jsp";
     private static final Injector injector =
-            Injector.getInstance(ApplicationStarter.class.getPackageName());
+            Injector.getInstance("ua.vedroid.dao3");
     private DriverService service =
             (DriverService) injector.getInstance(DriverService.class);
 
