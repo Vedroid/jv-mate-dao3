@@ -14,6 +14,14 @@ public class ConnectionUtil {
     private static final String SCHEMA = "taxi_service";
     private static final String TIMEZONE = "UTC";
 
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Can't find SQL Driver", e);
+        }
+    }
+
     private ConnectionUtil() {
     }
 
