@@ -15,6 +15,7 @@ public class LoginController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("ua.vedroid.dao3");
     private static final String LOGIN_JSP = "/WEB-INF/views/login.jsp";
+    private static final String DRIVER_ID = "driver_id";
     private AuthenticationService service =
             (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
@@ -33,7 +34,7 @@ public class LoginController extends HttpServlet {
         try {
             Driver driver = service.login(login, pwd);
             HttpSession session = req.getSession();
-            session.setAttribute("driver_id", driver.getId());
+            session.setAttribute(DRIVER_ID, driver.getId());
         } catch (AuthenticationException e) {
             req.setAttribute("msg", e.getMessage());
             req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);

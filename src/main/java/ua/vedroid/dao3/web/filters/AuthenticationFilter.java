@@ -1,6 +1,7 @@
 package ua.vedroid.dao3.web.filters;
 
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,18 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ua.vedroid.dao3.lib.Injector;
-import ua.vedroid.dao3.service.DriverService;
 
 public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
-    private static final Injector injector =
-            Injector.getInstance("ua.vedroid.dao3");
-    private DriverService service =
-            (DriverService) injector.getInstance(DriverService.class);
+    private Set<String> allowedUrls;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
+        allowedUrls = Set.of("/login", "/drivers/create");
     }
 
     @Override
@@ -30,11 +27,10 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String url = req.getServletPath();
-        if (url.equals("/login") || url.equals("/drivers/create")) {
+        if (allowedUrls.contains(url)) {
             filterChain.doFilter(req, resp);
             return;
         }
-
         Long driverId = (Long) req.getSession().getAttribute(DRIVER_ID);
         if (driverId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
