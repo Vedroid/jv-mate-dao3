@@ -1,6 +1,7 @@
 package ua.vedroid.dao3.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import ua.vedroid.dao3.dao.DriverDao;
 import ua.vedroid.dao3.lib.Inject;
 import ua.vedroid.dao3.lib.Service;
@@ -35,5 +36,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public boolean deleteById(Long id) {
         return driverDao.deleteById(id);
+    }
+
+    @Override
+    public Optional<Driver> findByLogin(String login) {
+        return driverDao.findByLogin(login);
     }
 }

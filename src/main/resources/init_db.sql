@@ -46,6 +46,8 @@ ALTER TABLE taxi_service.cars
 CREATE TABLE taxi_service.drivers
 (
     id             bigserial             NOT NULL,
+    login          character varying     NOT NULL,
+    password       character varying     NOT NULL,
     name           character varying     NOT NULL,
     licence_number character varying     NOT NULL,
     is_deleted     boolean DEFAULT false NOT NULL,

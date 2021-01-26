@@ -11,6 +11,14 @@
             <tr>
                 <td>
                     <form method="get"
+                          action="${pageContext.request.contextPath}/cars/my">
+                        <button type="submit">My cars</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form method="get"
                           action="${pageContext.request.contextPath}/manufacturers/create">
                         <button type="submit">Create manufacturer</button>
                     </form>

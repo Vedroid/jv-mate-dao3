@@ -35,10 +35,14 @@ public class InjectDataController extends HttpServlet {
         Manufacturer toyota = manufacturerService
                 .create(new Manufacturer("Toyota", "JP"));
 
-        Driver bob = driverService.create(new Driver("Bob", "BO123456"));
-        Driver alice = driverService.create(new Driver("Alice", "TT32534"));
-        Driver john = driverService.create(new Driver("John", "ME46387"));
-        Driver bruce = driverService.create(new Driver("Bruce", "TE540653"));
+        Driver bob = driverService.create(new Driver("bob1488", "1234",
+                "Bob", "BO123456"));
+        Driver alice = driverService.create(new Driver("alice", "1234",
+                "Alice", "TT32534"));
+        Driver john = driverService.create(new Driver("john1992", "1234",
+                "John", "ME46387"));
+        Driver bruce = driverService.create(new Driver("nogibator228", "1234",
+                "Bruce", "TE540653"));
 
         Car golfVariant = carService.create(new Car(volkswagen, "Golf Variant"));
         Car cybertruck = carService.create(new Car(tesla, "Cybertruck"));
